@@ -1,15 +1,15 @@
 ## server.r
 require('rCharts')
 #library(caret)
-library('randomForest')
-library(shiny)
+require('randomForest')
+require(shiny)
 #library(ggplot2)
 data <- read.csv("ENB2012_data.csv")
 col_data <- rep(0,nrow(data)+1)
 col_data[nrow(data)+1]=1
 col_data = as.factor(col_data)
 col_data = data.frame(col=col_data)
-
+rand
 load("learnByRf_Y1.rda")
 load("learnByRf_Y2.rda")
 
