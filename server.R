@@ -1,8 +1,8 @@
 ## server.r
-require('rCharts')
+#require('rCharts')
 require('caret')
 library(shiny)
-
+library(ggplot2)
 data <- read.csv("ENB2012_data.csv")
 col_data <- rep(0,nrow(data)+1)
 col_data[nrow(data)+1]=1
@@ -42,13 +42,14 @@ shinyServer(function(input, output) {
     print("Cooling Load ")
     Y2()
     })
-  output$pmyChart <- renderChart({
+  output$pmyChart <- renderPlot({
     input$plotButton
     isolate({
       newData<-cbind(rbind(data[,c(9,10)],data.frame(Y1=Y1(),
                                       Y2=Y2())),col_data)
-      p <- nPlot(Y2~Y1,data=newData,type="scatterChart",group="col",dom='pmyChart',width=480)
-      p$chart(color = c('brown', 'blue'))
+      #p <- nPlot(Y2~Y1,data=newData,type="scatterChart",group="col",dom='pmyChart',width=480)
+      #p$chart(color = c('brown', 'blue'))
+      p <- qplot(y=Y2,x=Y1,data=newData,color=col,xlab="Heating load",ylab="Cooling load",size=3)
       return(p)
       })
     })
