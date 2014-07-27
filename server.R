@@ -1,18 +1,16 @@
 ## server.r
-require('rCharts')
-#library(caret)
-require('randomForest')
+require(rCharts)
+require(randomForest)
 require(shiny)
-#library(ggplot2)
+require(ggplot2)
+require(stats)
 data <- read.csv("ENB2012_data.csv")
 col_data <- rep(0,nrow(data)+1)
 col_data[nrow(data)+1]=1
 col_data = as.factor(col_data)
 col_data = data.frame(col=col_data)
-rand
-load("learnByRf_Y1.rda")
-load("learnByRf_Y2.rda")
-
+load("pred_Y1.rda")
+load("pred_Y2.rda")
 options(error = browser)
 shinyServer(function(input, output) {
   input_data <- reactive({data.frame(
@@ -25,8 +23,8 @@ shinyServer(function(input, output) {
     X7=input$X7,
     X8=input$X8)})
   output$data <- renderPrint({input_data()})
-  Y1 <- reactive(predict(learnByRf_Y1,input_data()))
-  Y2 <- reactive(predict(learnByRf_Y2,input_data()))
+  Y1 <- reactive(predict(pred_Y1,input_data()))
+  Y2 <- reactive(predict(pred_Y2,input_data()))
   output$summa <- renderPrint({
     print("Quantile Heating Load(Y1):")
     quantile(data$Y1)
