@@ -43,11 +43,14 @@ shinyServer(function(input, output) {
     Y2()
     })
   output$pmyChart <- renderChart({
-    newData<-cbind(rbind(data[,c(9,10)],data.frame(Y1=Y1(),
-                                    Y2=Y2())),col_data)
-    p <- nPlot(Y2~Y1,data=newData,type="scatterChart",group="col",dom='pmyChart',width=480)
-    p$chart(color = c('brown', 'blue'))
-    return(p)
+    input$plotButton
+    isolate({
+      newData<-cbind(rbind(data[,c(9,10)],data.frame(Y1=Y1(),
+                                      Y2=Y2())),col_data)
+      p <- nPlot(Y2~Y1,data=newData,type="scatterChart",group="col",dom='pmyChart',width=480)
+      p$chart(color = c('brown', 'blue'))
+      return(p)
+      })
     })
   output$data_description <- renderText(read_file("./README.md"))
   output$data <- renderDataTable(data)
