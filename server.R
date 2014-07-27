@@ -1,7 +1,6 @@
 ## server.r
 require('rCharts')
 require('caret')
-library(shiny)
 
 data <- read.csv("ENB2012_data.csv")
 col_data <- rep(0,nrow(data)+1)
