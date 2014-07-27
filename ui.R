@@ -1,4 +1,3 @@
-#require(rCharts)
 shinyUI(pageWithSidebar(
   headerPanel("Energy efficiency prediction"),
   sidebarPanel(
@@ -55,8 +54,8 @@ shinyUI(pageWithSidebar(
   mainPanel(
     tabsetPanel(
       tabPanel("Predicted values & plot", verbatimTextOutput("Y1"),verbatimTextOutput("Y2"),
-               #showOutput("pmyChart","nvd3")), 
-               plotOutput("pmyChart")), 
+               #showOutput("pmyChart","nvd3")),
+               plotOutput("pmyChart")),
       tabPanel("Summary",verbatimTextOutput("summa"),verbatimTextOutput("summa2")),
       tabPanel("Training data",dataTableOutput("data")),
       tabPanel("Data source",verbatimTextOutput("data_description"))
